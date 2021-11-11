@@ -13,8 +13,8 @@ export default function Menu(){
                 <Link to="/porid">SHOW</Link>
                 <Link to="/tabela">INDEX</Link>
                 <Link to="/">CREATE</Link>
-                <h1>DELETE</h1>
-                <h1>UPDATE</h1>
+                <Link to="/delete">DELETE</Link>
+                <Link to="/update">UPDATE</Link>
             </div>
         </div>
     )
