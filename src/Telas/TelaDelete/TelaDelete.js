@@ -7,12 +7,12 @@ export default class TelaDelete extends Component {
         id: 0
     }
 
-    handleChange = event => {
-        this.setState({ id: event.target.value })
+    onChangeId = e => {
+        this.setState({ id: e.target.value })
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    onSubmit = e => {
+        e.preventDefault();
         axios.delete(`http://localhost:8080/usuario/${this.state.id}`)
             .then(res => {
                 console.log(res);
@@ -24,9 +24,9 @@ export default class TelaDelete extends Component {
             <div>
                 <Menu />
                 <div>
-                    <form className="table-container" onSubmit={this.handleSubmit}>
+                    <form className="table-container" onSubmit={this.onSubmit}>
                         <span>Apague por id</span>
-                        <input type="text" name="id" onChange={this.handleChange} />
+                        <input type="text" name="id" onChange={this.onChangeId} />
                         <button type="submit">Deletar</button>
                     </form>
                 </div>
