@@ -1,5 +1,5 @@
 import './Cadastro.css';
-import React,{Component} from 'react'
+import React from 'react'
 import Menu from '../../components/Menu/Menu'
 import axios from 'axios';
 
@@ -61,28 +61,30 @@ export default class FormCriar extends React.Component {
                 <Menu />
                     <form className="form-criar box-form" onSubmit={this.onSubmit}>
                         <h1>Criar Cadastro</h1>
-                            <span>Seu Nome</span>
+                            <span>Username lowercase</span>
                             <input
-                                name="nome"
+                                name="User"
                                 type="text"
+                                pattern="[a-z]{1,15}"
                                 value={this.state.nome}
                                 onChange={this.onChangeName} required></input>
                             <span>Seu Email</span>
                             <input
                                 name="email"
-                                type="text"
+                                type="email"
                                 value={this.state.email}
                                 onChange={this.onChangeEmail} required></input>
                             <span>Seu Telefone</span>
                             <input
                                 name="telefone"
                                 type="tel"
+                                pattern="[1-9]{1,12}"
                                 value={this.state.telefone}
                                 onChange={this.onChangeTelefone} required></input>
                             <span>Sua Senha</span>
                             <input
                                 name="senha"
-                                type="text"
+                                type="password"
                                 value={this.state.senha}
                                 onChange={this.onChangeSenha} required></input>
                         <button className="btn-criar" type="submit" > CREATE </button>

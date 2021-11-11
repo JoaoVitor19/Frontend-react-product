@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Menu from '../../components/Menu/Menu'
+import './TelaDelete.css'
 
 export default class TelaDelete extends Component {
     state = {

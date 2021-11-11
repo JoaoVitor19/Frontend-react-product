@@ -100,7 +100,7 @@ export default class UpdateTela extends React.Component {
                             type="text"
                             value={this.state.senha}
                             onChange={this.onChangeSenha} required></input>
-                        <button className="btn-criar" type="submit" > CREATE </button>
+                        <button className="btn-criar" type="submit" > Alterar </button>
                     </form>
                 </div>
 
