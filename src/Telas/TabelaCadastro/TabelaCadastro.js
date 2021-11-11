@@ -1,31 +1,54 @@
-import "./TabelaCadastro.css"
-import Menu from "../../components/Menu/Menu"
+import React, { Component } from 'react';
 import axios from 'axios';
+import TableU from '../../components/Table/Table';
+import Menu from '../../components/Menu/Menu'
+import './TabelaCadastro.css'
 
-export default function TabelaCadastro() {
+export default class TabelaCadastro extends Component {
 
-    return (
-        <div>
-            <Menu />
-            <table className="table-frontend">
-                <caption className="text-g">Minha Tabela Produtos</caption>
-                <thead>
-                    <tr className="table1">
-                        <th>Usuario</th>
-                        <th>Email</th>
-                        <th>Telefone</th>
-                        <th>Senha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className="table1">
-                            <td>nome</td>
-                            <td>nome</td>
-                            <td>nome</td>
-                            <td>nome</td>
-                        </tr>
-                </tbody>
-            </table>
-        </div>
-    );
+    constructor(props) {
+        super(props);
+        this.state = { usuarioCollection: [] };
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8080/usuario')
+            .then(res => {
+                this.setState({ usuarioCollection: res.data });
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    dadosTabela() {
+        return this.state.usuarioCollection.map((data, i) => {
+            return <TableU obj={data} key={i} />;
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <Menu />
+            <div className="">
+                <div className="container">
+                    <table className="table-container">
+                        <thead className="table-thread">
+                            <tr className="tabletr">
+                                <td>ID</td>
+                                <td>Name</td>
+                                <td>Email</td>
+                                <td>Telefone</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.dadosTabela()}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        )
+    }
 }

@@ -1,74 +1,93 @@
 import './Cadastro.css';
-import {React, useState} from 'react'
+import React,{Component} from 'react'
 import Menu from '../../components/Menu/Menu'
 import axios from 'axios';
 
-export default function FormCriar() {
+export default class FormCriar extends React.Component {
 
-        const [formValue, setformValue] = useState({
+    constructor(props) {
+        super(props)
+
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeTelefone = this.onChangeTelefone.bind(this);
+        this.onChangeSenha = this.onChangeSenha.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
+        this.state = {
             nome: '',
             email: '',
             telefone: '',
-            senha: '',
-        });
+            senha:'' ,
+        }
+    }
 
-        const handleSubmit = async () => {
-            const loginFormData = new FormData();
-            loginFormData.append("nome", formValue.nome)
-            loginFormData.append("email", formValue.email)
-            loginFormData.append("telefone", formValue.telefone)
-            loginFormData.append("senha", formValue.senha)
+    onChangeName(e) {
+        this.setState({ nome: e.target.value })
+    }
 
-            try {
-                   await axios({
-                    method: "post",
-                    url: "http:localhost:8080/usuario",
-                    data: loginFormData,
-                    headers: { "Content-Type": "application/json" },
-                });
-            } catch (error) {
+    onChangeEmail(e) {
+        this.setState({ email: e.target.value })
+    }
+
+    onChangeTelefone(e) {
+        this.setState({ telefone: e.target.value })
+    }
+
+    onChangeSenha(e) {
+        this.setState({ senha: e.target.value })
+    }
+
+    onSubmit(e) {
+        const userObject = {
+            nome: this.state.nome,
+            email: this.state.email,
+            telefone: this.state.telefone,
+            senha: this.state.senha,
+        };
+
+        axios.post('http://localhost:8080/usuario', userObject)
+            .then((res) => {
+                console.log(res.data)
+            }).catch((error) => {
                 console.log(error)
-            }
-        }
-
-        const handleChange = (event) => {
-            setformValue({
-                ...formValue,
-                [event.target.name]: event.target.value
             });
-        }
 
+        this.setState({ nome: '', email: '' , telefone: '', senha: '' })
+    }
+    render() {
         return (
             <div>
                 <Menu />
-                    <form className="form-criar box-form" onSubmit={handleSubmit}>
+                    <form className="form-criar box-form" onSubmit={this.onSubmit}>
                         <h1>Criar Cadastro</h1>
                             <span>Seu Nome</span>
                             <input
                                 name="nome"
                                 type="text"
-                                value={formValue.nome}
-                                onChange={handleChange}></input>
+                                value={this.state.nome}
+                                onChange={this.onChangeName} required></input>
                             <span>Seu Email</span>
                             <input
                                 name="email"
                                 type="text"
-                                value={formValue.email}
-                                onChange={handleChange}></input>
+                                value={this.state.email}
+                                onChange={this.onChangeEmail} required></input>
                             <span>Seu Telefone</span>
                             <input
                                 name="telefone"
                                 type="tel"
-                                value={formValue.telefone}
-                                onChange={handleChange}></input>
+                                value={this.state.telefone}
+                                onChange={this.onChangeTelefone} required></input>
                             <span>Sua Senha</span>
                             <input
                                 name="senha"
                                 type="text"
-                                value={formValue.senha}
-                                onChange={handleChange}></input>
-                        <button className="btn-criar" type="Submit"> CREATE </button>
+                                value={this.state.senha}
+                                onChange={this.onChangeSenha} required></input>
+                        <button className="btn-criar" type="submit" > CREATE </button>
                     </form>
                 </div>
-        )
+        );
     }
+}

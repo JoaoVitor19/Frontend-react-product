@@ -1,4 +1,5 @@
 import './Menu.css';
+import { Link } from 'react-router-dom';
 
 export default function Menu(){
     return(
@@ -9,10 +10,11 @@ export default function Menu(){
                 </div>
             </div>
             <div className="section-menu">
-                <h1>INDEX</h1>
-                <h1>SHOW</h1>
-                <h1>CREATE</h1>
+                <Link to="/porid">SHOW</Link>
+                <Link to="/tabela">INDEX</Link>
+                <Link to="/">CREATE</Link>
                 <h1>DELETE</h1>
+                <h1>UPDATE</h1>
             </div>
         </div>
     )

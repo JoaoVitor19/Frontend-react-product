@@ -1,7 +1,13 @@
-.table-frontend{
-    color: white;
+.table-container{
     background-image: url(../../assets/backgroun4.jpg);
+    color: white;
     width: 100%;
-    height: 550px;
-    align-items: center;
+    height: 300px;
+    padding: 200px;
+}
+
+.tabletr{
+    border: 5px solid white;
+    font-size: 25px;
+    border-bottom: 10px;
 }
